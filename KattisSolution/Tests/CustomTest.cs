@@ -9,6 +9,7 @@ using NUnit.Framework;
 
 namespace KattisSolution.Tests
 {
+    [Ignore]
     [TestFixture]
     public class CustomTest
     {
