@@ -21,3 +21,5 @@ Rename-Item KattisSolution.sln $newSlnName
 
 $newSubmitScript = "python submit.py -p" + $args[0] +" KattisSolution\Program.cs KattisSolution\InputOutput.cs"
 New-Item "submitMe.bat" -type file -force -value $newSubmitScript
+
+Start-Process $newSlnName
