@@ -1,17 +1,19 @@
 # Download the file to a specific location
 $clnt = new-object System.Net.WebClient
+$workingDir = Get-Location
+Write-Host "Working dir " $workingDir
+
 $url = "https://open.kattis.com/download/sampledata?id=" + $args[0]
-$file = ".\sampledata.zip"
+$file = $workingDir.ToString() + "\sampledata.zip"
 $clnt.DownloadFile($url,$file)
+Write-Host "File downloaded to " $file
 
 # Unzip the file to specified location
 $shell_app=new-object -com shell.application
-$filePath = [System.IO.Path]::GetFullPath($file)
-$zip_file = $shell_app.namespace($filePath)
-#Write-Host "Zip:" $zip_file;
-$destination = $shell_app.namespace([System.IO.Path]::GetFullPath("."))
-# Write-Host $destination
+$zip_file = $shell_app.namespace($file)
+$destination = $shell_app.namespace($workingDir.ToString())
 $destination.Copyhere($zip_file.items())
+Write-Host "Unzipped:" $zip_file
 
 $newSlnName = $args[0]+".sln"
 
