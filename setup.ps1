@@ -23,8 +23,8 @@ New-Item "submitMe.bat" -type file -force -value $newSubmitScript
 
 $gitCommand = "checkout -b " + $args[0]
 Start-Process git -ArgumentList $gitCommand -wait -NoNewWindow -PassThru
-Start-Process git -ArgumentList "add --all" -wait -NoNewWindow
+Start-Process git -ArgumentList "add --all --verbose" -wait -NoNewWindow
 Start-Sleep 1
-Start-Process git -ArgumentList "commit -m 'setup commit'" -wait -NoNewWindow -PassThru
+Start-Process git -ArgumentList "commit -m 'setup commit' --verbose" -wait -NoNewWindow -PassThru
 
 Start-Process $newSlnName
