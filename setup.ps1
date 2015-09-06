@@ -24,7 +24,7 @@ $newSubmitScript = "python submit.py -p" + $args[0] +" KattisSolution\Program.cs
 New-Item "submitMe.bat" -type file -force -value $newSubmitScript
 
 Start-Process git -ArgumentList $gitCommand -wait -NoNewWindow -PassThru
-Start-Process git -ArgumentList "add ." -wait -NoNewWindow -PassThru
+Start-Process git -ArgumentList "add --all" -wait -NoNewWindow -PassThru
 Start-Process git -ArgumentList "commit -am 'setup commit'" -wait -NoNewWindow -PassThru
 
 Start-Process $newSlnName
