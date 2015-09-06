@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace KattisSolution.Helpers.Tests
 {
     [TestFixture]
-    [Category("integration")]
+    [Category("Helpers")]
     public class TestCaseFinderTests
     {
         private const string TestCaseIn = "12345.in";
@@ -34,7 +34,7 @@ namespace KattisSolution.Helpers.Tests
         }
 
         [Test]
-        public void Should_FindTestCasesInTheSolutionDir()
+        public void TestCaseFinder_Should_FindTestCasesInTheSolutionDir()
         {
             // Arrange
 

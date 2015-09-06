@@ -19,7 +19,7 @@ namespace KattisSolution.Tests
         }
 
         [Test]
-        public void AllCases_Should_Pass()
+        public void AllCasesFromFiles_Should_Pass()
         {
             foreach (var testCase in _testCases)
             {

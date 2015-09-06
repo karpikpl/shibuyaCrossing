@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.Threading.Tasks;
-using NUnit.Core;
 using NUnit.Framework;
 
 namespace KattisSolution.Tests
 {
     [Ignore]
     [TestFixture]
+    [Category("sample")]
     public class CustomTest
     {
         [Test]
-        public void Should_Pass()
+        public void SampleTest_WithStringData_Should_Pass()
         {
             // Arrange
             const string expectedAnswer = "50\n";

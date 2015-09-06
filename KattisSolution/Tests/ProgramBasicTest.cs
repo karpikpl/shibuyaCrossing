@@ -6,10 +6,11 @@ namespace KattisSolution.Tests
 {
     [Ignore]
     [TestFixture]
+    [Category("sample")]
     public class ProgramBasicTest
     {
         [Test]
-        public void Solver_Should_ReturnIntMulitpliedBy5()
+        public void Solver_Should_ReturnIntMulitpliedBy5_When_SampleImplementation()
         {
             // Arrange
             using (var stdin = new MemoryStream(Encoding.UTF8.GetBytes(" \n 12 ")))

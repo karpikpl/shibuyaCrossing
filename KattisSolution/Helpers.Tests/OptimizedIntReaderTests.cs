@@ -5,6 +5,7 @@ using NUnit.Framework;
 
 namespace KattisSolution.Helpers.Tests
 {
+    [Category("Helpers")]
     [TestFixture]
     public class OptimizedIntReaderTests
     {
@@ -15,7 +16,7 @@ namespace KattisSolution.Helpers.Tests
 
         [Test]
         [ExpectedException(typeof(NoMoreTokensException))]
-        public void Should_ThrowException_When_StreamEmpty()
+        public void OptimizedReader_Should_ThrowException_When_StreamEmpty()
         {
             // Arrange
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes("")))
@@ -28,7 +29,7 @@ namespace KattisSolution.Helpers.Tests
         }
 
         [Test]
-        public void Should_Return0_When_0()
+        public void OptimizedReader_Should_Return0_When_0()
         {
             // Arrange
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes("0")))
@@ -44,7 +45,7 @@ namespace KattisSolution.Helpers.Tests
         }
 
         [Test]
-        public void Should_Return9_When_9()
+        public void OptimizedReader_Should_Return9_When_9()
         {
             // Arrange
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes("9")))
@@ -60,7 +61,7 @@ namespace KattisSolution.Helpers.Tests
         }
 
         [Test]
-        public void Should_Return12345_When_12345()
+        public void OptimizedReader_Should_Return12345_When_12345()
         {
             // Arrange
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes("12345")))
@@ -76,7 +77,7 @@ namespace KattisSolution.Helpers.Tests
         }
 
         [Test]
-        public void Should_Return12_When_12AndSomeOtherText()
+        public void OptimizedReader_Should_Return12_When_12AndSomeOtherText()
         {
             // Arrange
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(" \n 12 ")))
