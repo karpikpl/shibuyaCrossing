@@ -16,10 +16,14 @@ $destination.Copyhere($zip_file.items())
 Write-Host "Unzipped:" $zip_file
 
 $newSlnName = $args[0]+".sln"
+$gitCommand = "checkout -b " + $args[0]
 
 Rename-Item KattisSolution.sln $newSlnName
 
 $newSubmitScript = "python submit.py -p" + $args[0] +" KattisSolution\Program.cs KattisSolution\InputOutput.cs"
 New-Item "submitMe.bat" -type file -force -value $newSubmitScript
+
+Start-Process git -ArgumentList $gitCommand -wait -NoNewWindow -PassThru
+Start-Process git -ArgumentList "git commit -am \"setup commit\"" -wait -NoNewWindow -PassThru
 
 Start-Process $newSlnName
