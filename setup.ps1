@@ -25,6 +25,6 @@ New-Item "submitMe.bat" -type file -force -value $newSubmitScript
 
 Start-Process git -ArgumentList $gitCommand -wait -NoNewWindow -PassThru
 Start-Process git -ArgumentList "add --all" -wait -NoNewWindow -PassThru
-Start-Process git -ArgumentList "commit -am 'setup commit'" -wait -NoNewWindow -PassThru
+Start-Process git -ArgumentList "commit -m 'setup commit'" -wait -NoNewWindow -PassThru
 
 Start-Process $newSlnName
