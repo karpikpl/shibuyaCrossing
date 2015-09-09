@@ -1,3 +1,6 @@
+# remove origin
+Start-Process git -ArgumentList "remote remove origin" -wait -NoNewWindow -PassThru
+
 # Download the file to a specific location
 $clnt = new-object System.Net.WebClient
 $workingDir = Get-Location
