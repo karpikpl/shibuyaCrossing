@@ -16,6 +16,7 @@ namespace KattisSolution
             IScanner scanner = new OptimizedPositiveIntReader(stdin);
             // uncomment when you need more advanced reader
             // scanner = new Scanner(stdin);
+            // scanner = new LineReader(stdin);
             BufferedStdoutWriter writer = new BufferedStdoutWriter(stdout);
 
             var input = scanner.NextInt();
