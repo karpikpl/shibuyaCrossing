@@ -1,4 +1,4 @@
-$cloneParams = "clone https://github.com/karpikpl/Kattis.git " + $args[0]
+$cloneParams = "clone https://karpik@bitbucket.org/karpik/kattissolution.git " + $args[0]
 Start-Process git -ArgumentList $cloneParams -wait -NoNewWindow -PassThru
 
 $newPath = ".\\" + $args[0]
