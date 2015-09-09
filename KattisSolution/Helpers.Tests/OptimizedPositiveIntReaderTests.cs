@@ -7,7 +7,7 @@ namespace KattisSolution.Helpers.Tests
 {
     [Category("Helpers")]
     [TestFixture]
-    public class OptimizedIntReaderTests
+    public class OptimizedPositiveIntReaderTests
     {
         [TestFixtureSetUp]
         public void SetUp()
@@ -21,7 +21,7 @@ namespace KattisSolution.Helpers.Tests
             // Arrange
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes("")))
             {
-                var target = new OptimizedIntReader(ms);
+                var target = new OptimizedPositiveIntReader(ms);
 
                 // Act
                 target.NextInt();
@@ -34,7 +34,7 @@ namespace KattisSolution.Helpers.Tests
             // Arrange
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes("0")))
             {
-                var target = new OptimizedIntReader(ms);
+                var target = new OptimizedPositiveIntReader(ms);
 
                 // Act
                 var result = target.NextInt();
@@ -50,7 +50,7 @@ namespace KattisSolution.Helpers.Tests
             // Arrange
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes("9")))
             {
-                var target = new OptimizedIntReader(ms);
+                var target = new OptimizedPositiveIntReader(ms);
 
                 // Act
                 var result = target.NextInt();
@@ -66,7 +66,7 @@ namespace KattisSolution.Helpers.Tests
             // Arrange
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes("12345")))
             {
-                var target = new OptimizedIntReader(ms);
+                var target = new OptimizedPositiveIntReader(ms);
 
                 // Act
                 var result = target.NextInt();
@@ -82,7 +82,7 @@ namespace KattisSolution.Helpers.Tests
             // Arrange
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(" \n 12 ")))
             {
-                var target = new OptimizedIntReader(ms);
+                var target = new OptimizedPositiveIntReader(ms);
 
                 // Act
                 var result = target.NextInt();

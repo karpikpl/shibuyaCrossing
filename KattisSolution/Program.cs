@@ -13,7 +13,7 @@ namespace KattisSolution
 
         public static void Solve(Stream stdin, Stream stdout)
         {
-            IScanner scanner = new OptimizedIntReader(stdin);
+            IScanner scanner = new OptimizedPositiveIntReader(stdin);
             // uncomment when you need more advanced reader
             // scanner = new Scanner(stdin);
             BufferedStdoutWriter writer = new BufferedStdoutWriter(stdout);

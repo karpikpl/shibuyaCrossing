@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 
 namespace KattisSolution.IO
@@ -114,11 +115,11 @@ namespace KattisSolution.IO
         }
     }
 
-    public class OptimizedIntReader : IScanner
+    public class OptimizedPositiveIntReader : IScanner
     {
         private readonly StreamReader _reader;
 
-        public OptimizedIntReader(Stream inStream)
+        public OptimizedPositiveIntReader(Stream inStream)
         {
             _reader = new StreamReader(inStream);
         }
@@ -168,6 +169,46 @@ namespace KattisSolution.IO
         public string Next()
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public class LineReader : IScanner
+    {
+        private readonly StreamReader _reader;
+
+        public LineReader(Stream inStream)
+        {
+            _reader = new StreamReader(inStream);
+        }
+
+        public int NextInt()
+        {
+            return int.Parse(Next(), CultureInfo.InvariantCulture);
+        }
+
+        public long NextLong()
+        {
+            return Int64.Parse(Next(), CultureInfo.InvariantCulture);
+        }
+
+        public float NextFloat()
+        {
+            return float.Parse(Next(), CultureInfo.InvariantCulture);
+        }
+
+        public double NextDouble()
+        {
+            return Double.Parse(Next(), CultureInfo.InvariantCulture);
+        }
+
+        public bool HasNext()
+        {
+            return !_reader.EndOfStream;
+        }
+
+        public string Next()
+        {
+            return _reader.ReadLine();
         }
     }
 }
