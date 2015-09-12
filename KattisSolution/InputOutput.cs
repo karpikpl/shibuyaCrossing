@@ -6,9 +6,9 @@ namespace KattisSolution.IO
 {
     public class Tokenizer
     {
-        string[] tokens = new string[0];
+        private readonly StreamReader reader;
         private int pos;
-        StreamReader reader;
+        private string[] tokens = new string[0];
 
         public Tokenizer(Stream inStream)
         {
@@ -36,7 +36,7 @@ namespace KattisSolution.IO
                 }
                 return tokens[pos];
             }
-            string line = reader.ReadLine();
+            var line = reader.ReadLine();
             if (line == null)
             {
                 // There is no more data to read
@@ -56,7 +56,7 @@ namespace KattisSolution.IO
 
         public string Next()
         {
-            string next = PeekNext();
+            var next = PeekNext();
             if (next == null)
                 throw new NoMoreTokensException();
             ++pos;
@@ -66,7 +66,6 @@ namespace KattisSolution.IO
 
     public class Scanner : Tokenizer, IScanner
     {
-
         public Scanner(Stream inStream)
             : base(inStream)
         {
@@ -127,14 +126,14 @@ namespace KattisSolution.IO
         public int NextInt()
         {
             int c, result = 0;
-            bool isInt = false;
+            var isInt = false;
             while (!_reader.EndOfStream)
             {
                 c = _reader.Read();
 
                 while (c >= '0' && c <= '9')
                 {
-                    result = result * 10 + c - '0';
+                    result = result*10 + c - '0';
                     c = _reader.Read();
                     isInt = true;
                 }
@@ -188,7 +187,7 @@ namespace KattisSolution.IO
 
         public long NextLong()
         {
-            return Int64.Parse(Next(), CultureInfo.InvariantCulture);
+            return long.Parse(Next(), CultureInfo.InvariantCulture);
         }
 
         public float NextFloat()
@@ -198,7 +197,7 @@ namespace KattisSolution.IO
 
         public double NextDouble()
         {
-            return Double.Parse(Next(), CultureInfo.InvariantCulture);
+            return double.Parse(Next(), CultureInfo.InvariantCulture);
         }
 
         public bool HasNext()
