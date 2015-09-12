@@ -21,7 +21,7 @@ Write-Host "Unzipped:" $zip_file
 $newSlnName = $args[0]+".sln"
 Rename-Item KattisSolution.sln $newSlnName
 
-$newSubmitScript = "python submit.py -p" + $args[0] +" KattisSolution\Program.cs KattisSolution\InputOutput.cs"
+$newSubmitScript = "python kattisSubmit.py -p" + $args[0] +" KattisSolution\Program.cs KattisSolution\InputOutput.cs -f"
 New-Item "submitMe.bat" -type file -force -value $newSubmitScript
 
 # $gitCommand = "checkout -b " + $args[0]
