@@ -5,5 +5,5 @@ $newPath = ".\\" + $args[0]
 
 Set-Location -Path $newPath -PassThru
 
-$expression = ".\\setup.ps1 " + $args[0]
+$expression = ".\\projectSetup.ps1 " + $args[0]
 Invoke-Expression $expression

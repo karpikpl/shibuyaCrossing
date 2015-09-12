@@ -18,6 +18,9 @@ $destination = $shell_app.namespace($workingDir.ToString())
 $destination.Copyhere($zip_file.items())
 Write-Host "Unzipped:" $zip_file
 
+# delete zip file
+Remove-Item $file
+
 $newSlnName = $args[0]+".sln"
 Rename-Item KattisSolution.sln $newSlnName
 
