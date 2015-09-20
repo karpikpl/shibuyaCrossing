@@ -1,4 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
@@ -114,22 +118,53 @@ namespace KattisSolution.Tests
             }
         }
 
+        [Ignore]
         [Test]
         public void SampleTest_WithStringData_Should_Pass6()
         {
             // Arrange
             const string expectedAnswer = "5\n";
-
-            using (var input = new MemoryStream(Encoding.UTF8.GetBytes("9 15\n1 7\n3 9\n2 9\n1 2\n2 3\n5 6\n1 5\n1 4\n1 6\n4 6\n5 7\n6 7\n4 5\n4 7\n1 3\n")))
-            using (var output = new MemoryStream())
+            Random rand = new Random();
+            var result = expectedAnswer;
+            List<string> sampleData = new List<string>
             {
-                // Act
-                Program.Solve(input, output);
-                var result = Encoding.UTF8.GetString(output.ToArray());
+                "1 7\n",
+                "3 9\n",
+                "2 9\n",
+                "1 2\n",
+                "2 3\n",
+                "5 6\n",
+                "1 5\n",
+                "1 4\n",
+                "1 6\n",
+                "4 6\n",
+                "5 7\n",
+                "6 7\n",
+                "4 5\n",
+                "4 7\n",
+                "1 3\n"
+            };
 
-                // Assert
-                Assert.That(result, Is.EqualTo(expectedAnswer));
+            StringBuilder sb = null;
+            while (result == expectedAnswer)
+            {
+                sb = new StringBuilder("9 15\n");
+                foreach (var entry in sampleData.OrderBy(e => rand.Next()))
+                {
+                    sb.Append(entry);
+                }
+                using (var input = new MemoryStream(Encoding.UTF8.GetBytes(sb.ToString())))
+                using (var output = new MemoryStream())
+                {
+                    // Act
+                    Program.Solve(input, output);
+                    result = Encoding.UTF8.GetString(output.ToArray());
+
+                    // Assert
+                    Assert.That(result, Is.EqualTo(expectedAnswer));
+                }
             }
+            Debug.WriteLine("!!!Failed for " + sb);
         }
 
         [Test]

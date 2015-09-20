@@ -74,8 +74,8 @@ namespace KattisSolution
             foreach (var meeting in meetings.OrderByDescending(g => g.Value.Count))
             {
                 // we know that for key all connections are there
-                var everyoneBumped = new HashSet<int> { meeting.Key };
-                Debug.WriteLine("Checking " + meeting.Key + " with: " + string.Join(", ", meeting.Value));
+                int[] bumpCount = new int[meeting.Value.Count];
+                //Debug.WriteLine("Checking " + meeting.Key + " with: " + string.Join(", ", meeting.Value));
 
                 for (int j = 0; j < meeting.Value.Count; j++)
                 {
@@ -85,20 +85,19 @@ namespace KattisSolution
                     {
                         var personB = meeting.Value.ElementAt(i);
                         //Debug.WriteLine("Looking for {0} =? {1}", personA, personB);
-                        if (!meetings[personA].Contains(personB))
+                        if (meetings[personA].Contains(personB))
                         {
-                            //Debug.WriteLine("{0} <-> {1} not found", personA, personB);
-                            personA = -1;
-                            break;
+                            bumpCount[j]++;
+                            bumpCount[i]++;
                         }
                     }
 
-                    if (personA > 0)
-                        everyoneBumped.Add(personA);
+                    //                    if (personA > 0)
+                    //                        everyoneBumped.Add(personA);
                 }
 
-                Debug.WriteLine("Found group: " + string.Join(", ", everyoneBumped));
-                result = Math.Max(everyoneBumped.Count, result);
+                //Debug.WriteLine("Found group: " + string.Join(", ", bumpCount));
+                result = Math.Max(bumpCount.Max() + 2, result);
             }
 
             writer.Write(result);
