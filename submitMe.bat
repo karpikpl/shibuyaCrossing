@@ -1,0 +1,1 @@
+python kattisSubmit.py -pshibuyacrossing KattisSolution\Program.cs KattisSolution\InputOutput.cs -f
