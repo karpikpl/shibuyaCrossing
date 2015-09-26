@@ -13,7 +13,7 @@ namespace KattisSolution.Tests
     public class CustomTest
     {
         [Test]
-        public void SampleTest_WithStringData_Should_Pass()
+        public void SampleTest_WithStringData_Should_Pass_Extreeme()
         {
             // Arrange
             const string expectedAnswer = "13\n";
@@ -24,6 +24,36 @@ namespace KattisSolution.Tests
                     if (i != j)
                     {
                         inputString.Append(i).Append(" ").Append(j).Append("\n");
+                    }
+                }
+
+
+            using (var input = new MemoryStream(Encoding.UTF8.GetBytes(inputString.ToString())))
+            using (var output = new MemoryStream())
+            {
+                // Act
+                Program.Solve(input, output);
+                var result = Encoding.UTF8.GetString(output.ToArray());
+
+                // Assert
+                Assert.That(result, Is.EqualTo(expectedAnswer));
+            }
+        }
+
+        [Test]
+        public void SampleTest_WithStringData_Should_Pass_100()
+        {
+            // Arrange
+            const string expectedAnswer = "13\n";
+            int count = 0;
+            StringBuilder inputString = new StringBuilder("100 1188\n");
+            for (int i = 1; i <= 12; i++)
+                for (int j = 1; j <= 100; j++)
+                {
+                    if (i != j)
+                    {
+                        inputString.Append(i).Append(" ").Append(j).Append("\n");
+                        count++;
                     }
                 }
 
@@ -86,7 +116,7 @@ namespace KattisSolution.Tests
         public void SampleTest_WithStringData_Should_Pass_When_ZereBumps()
         {
             // Arrange
-            const string expectedAnswer = "0\n";
+            const string expectedAnswer = "1\n";
 
             using (var input = new MemoryStream(Encoding.UTF8.GetBytes("2 0\n")))
             using (var output = new MemoryStream())
@@ -192,6 +222,24 @@ namespace KattisSolution.Tests
             const string expectedAnswer = "2\n";
 
             using (var input = new MemoryStream(Encoding.UTF8.GetBytes("9 10\n1 7\n3 9\n2 9\n1 2\n5 6\n1 4\n1 6\n5 7\n4 5\n1 3\n")))
+            using (var output = new MemoryStream())
+            {
+                // Act
+                Program.Solve(input, output);
+                var result = Encoding.UTF8.GetString(output.ToArray());
+
+                // Assert
+                Assert.That(result, Is.EqualTo(expectedAnswer));
+            }
+        }
+
+        [Test]
+        public void SampleTest_WithStringData_Should_Pass_When_FullCycleOf4()
+        {
+            // Arrange
+            const string expectedAnswer = "4\n";
+
+            using (var input = new MemoryStream(Encoding.UTF8.GetBytes("4 6\n1 2\n1 3\n1 4\n2 3\n2 4\n3 4\n")))
             using (var output = new MemoryStream())
             {
                 // Act

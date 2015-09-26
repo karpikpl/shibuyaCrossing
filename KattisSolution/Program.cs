@@ -33,6 +33,22 @@ namespace KattisSolution
                 return;
             }
 
+            if (m == 1)
+            {
+                writer.Write(2);
+                writer.Write("\n");
+                writer.Flush();
+                return;
+            }
+
+            if (m == 0)
+            {
+                writer.Write(1);
+                writer.Write("\n");
+                writer.Flush();
+                return;
+            }
+
             var meetings = new Dictionary<int, HashSet<int>>(n);
 
             for (int i = 0; i < m; i++)
@@ -69,60 +85,58 @@ namespace KattisSolution
                 }
             }
 
-            var result = 0;
+            answer = -1;
+            BronKerbosch1(new int[0], Enumerable.Range(1, n).ToArray(), new int[0], meetings);
 
-            foreach (var meeting in meetings.OrderByDescending(g => g.Value.Count))
-            {
-                // we know that for key all connections are there
-                int[] bumpCount = new int[meeting.Value.Count];
-                //Debug.WriteLine("Checking " + meeting.Key + " with: " + string.Join(", ", meeting.Value));
+            Debug.WriteLine("Answer updated {0} time!", answerUpdated);
 
-                for (int j = 0; j < meeting.Value.Count; j++)
-                {
-                    var personA = meeting.Value.ElementAt(j);
-
-                    for (int i = j + 1; i < meeting.Value.Count; i++)
-                    {
-                        var personB = meeting.Value.ElementAt(i);
-                        //Debug.WriteLine("Looking for {0} =? {1}", personA, personB);
-                        if (meetings[personA].Contains(personB))
-                        {
-                            bumpCount[j]++;
-                            bumpCount[i]++;
-                        }
-                    }
-
-                    //                    if (personA > 0)
-                    //                        everyoneBumped.Add(personA);
-                }
-
-                //Debug.WriteLine("Found group: " + string.Join(", ", bumpCount));
-                result = Math.Max(bumpCount.Max() + 2, result);
-            }
-
-            writer.Write(result);
+            //            if (answer.Count == 0)
+            //                writer.Write(2);
+            //            else
+            writer.Write(answer);
             writer.Write("\n");
             writer.Flush();
         }
 
-        public class Group
+        public static int answer;
+        private static int answerUpdated;
+
+        public static void BronKerbosch1(int[] R, int[] P, int[] X, Dictionary<int, HashSet<int>> neighbors)
         {
-            public Group(int a, int b)
+            //if P and X are both empty:
+            if (!P.Any() && !X.Any())
+            // report R as a maximal clique
             {
-                Meetings = 1;
-                People = new HashSet<int> { a, b };
+                if (R.Count() > answer)
+                {
+                    answerUpdated++;
+                    answer = R.Count();
+                }
+                return;
             }
 
-            public readonly HashSet<int> People;
-            public int Meetings;
+            var pCopy = P.ToArray();
 
-            public void Add(int a, int b)
+            // for each vertex v in P:
+            foreach (var v in pCopy)
             {
-                if (!People.Contains(a))
-                    People.Add(a);
-                if (!People.Contains(b))
-                    People.Add(b);
-                Meetings++;
+                var vGraph = new[] { v };
+                //P := P \ {v}
+                P = P.Except(vGraph).ToArray();
+
+                var vNeigbors = neighbors.ContainsKey(v) ? neighbors[v] : new HashSet<int>();
+
+                //BronKerbosch1(R ⋃ {v}, P ⋂ N(v), X ⋂ N(v))
+                BronKerbosch1(R.Union(vGraph).ToArray(), P.Intersect(vNeigbors).ToArray(),
+                    X.Intersect(vNeigbors).ToArray(), neighbors);
+                //
+
+
+                //X := X ⋃ {v}
+                X = X.Intersect(vGraph).ToArray();
+
+                //                if (answer > 0)
+                //                    return;
             }
         }
     }
